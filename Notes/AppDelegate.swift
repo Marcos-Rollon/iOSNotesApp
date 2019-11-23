@@ -15,8 +15,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        print("Realm file url is")
-//        print(Realm.Configuration.defaultConfiguration.fileURL)
+        print("Realm file url is")
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+        // NOT FOR PRODUCTION, THIS JUST CREATES A "ROOT" USER IF IT DOES NOT EXITS
+        let realm = try! Realm()
+        let predicate = NSPredicate(format: "name = %@", "root")
+        let users = realm.objects(UserModel.self).filter(predicate)
+        if users.count <= 0 {
+            print("Creating root user...")
+            try! realm.write {
+                let root = UserModel()
+                root.id = IDGenerator.generate()
+                root.name = "root"
+                root.password = "root"
+                root.role = 0
+                realm.add(root)
+            }
+        }
+        
         //Personalize the navigation bar
         let navigationBarApperance = UINavigationBar.appearance()
         navigationBarApperance.tintColor = .mainTurquoise()
