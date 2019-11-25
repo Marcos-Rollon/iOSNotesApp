@@ -29,9 +29,6 @@ struct UserManager {
     public func deleteUser(userID : String, completion : ((_ success : Bool)-> Void)){
         repository.deleteUser(userID: userID, completion: completion)
     }
-    public func getUserByID(userID: String, completion : ((_ success : Bool)-> Void)){
-        repository.getUserByID(userID: userID, completion: completion)
-    }
     public func getAllUsers(completion: (([User])->Void)){
         repository.getAllUsers(completion: completion)
     }

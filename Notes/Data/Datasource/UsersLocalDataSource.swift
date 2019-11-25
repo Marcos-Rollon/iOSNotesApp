@@ -15,7 +15,6 @@ protocol UsersLocalDataSource {
     func createNewUser(email : String, password : String, role : Int,  completion : ((Bool)->Void))
     func updateUser(userID : String, newUser : User, completion : ((Bool)->Void))
     func deleteUser(userID : String, completion : ((Bool)->Void))
-    func getUserByID(userID : String, completion : ((Bool)->Void))
     func getAllUsers(completion : ([User])->Void)
 }
 

@@ -41,10 +41,6 @@ class UsersRepositoryImplementation : UserRepository{
         localDataSource.updateUser(userID: userID, newUser: newUser, completion: completion)
     }
     
-    func getUserByID(userID: String, completion: ((Bool) -> Void)) {
-        localDataSource.getUserByID(userID: userID, completion: completion)
-    }
-    
     func getAllUsers(completion: ([User]) -> Void) {
         localDataSource.getAllUsers(completion : completion)
     }

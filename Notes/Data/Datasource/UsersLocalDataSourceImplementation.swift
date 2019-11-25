@@ -75,6 +75,30 @@ class UsersLocalDataSourceImplementation : UsersLocalDataSource{
     
     func updateUser(userID: String, newUser: User,  completion: ((Bool) -> Void)) {
         // Implement this
+        let userModels = self.findUserByID(userID)
+        // Check for only 1 note
+        if let userModel = userModels.first, userModels.count == 1{
+            do{
+                try realm.write {
+                    userModel.name = newUser.name
+                    let role : Int
+                    switch newUser.role {
+                    case .teamMember:
+                        role = 1
+                    case .root:
+                        role = 0
+                    }
+                    userModel.role = role
+                    completion(true)
+                }
+            } catch{
+                completion(false)
+            }
+            
+        }else {
+            print("[NotesLocalDataSourceImpl] None or more than one note to edit")
+            completion(false)
+        }
         completion(true)
     }
     
@@ -86,11 +110,6 @@ class UsersLocalDataSourceImplementation : UsersLocalDataSource{
         }
         // Delete it
         self.deleteUser(user, completion: completion)
-    }
-    
-    func getUserByID(userID: String, completion: ((Bool) -> Void)) {
-        // TODO: - Implement this
-        completion(true)
     }
     
     func getAllUsers(completion: ([User]) -> Void) {

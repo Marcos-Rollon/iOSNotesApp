@@ -15,6 +15,5 @@ protocol UserRepository {
     func createUser(email : String, password : String, role : Int, completion : ((_ success : Bool)-> Void))
     func deleteUser(userID : String, completion : ((_ success : Bool)-> Void))
     func updateUser(userID : String, newUser : User, completion : ((_ success : Bool)-> Void))
-    func getUserByID(userID : String, completion : ((_ success : Bool)-> Void))
     func getAllUsers(completion : ([User])->Void)
 }

@@ -44,7 +44,6 @@ class NotesLocalDataSourceImplementation : NotesLocalDataSource{
     
     func editNote(noteID: String, newNote: Note, completion: (Bool) -> Void) {
         let notesModel = findNoteByID(noteID)
-        print("Edit note")
         // Check for only 1 note
         if let noteModel = notesModel.first, notesModel.count == 1{
             // Update fields, realm is updated in real time (which is pretty cool tbh)
